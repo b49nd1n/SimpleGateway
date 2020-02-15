@@ -1,0 +1,2 @@
+outdoor_sensor;1235;^.*?(?<type>\w+)=(?<value>\d+\.?\d*).*$
+indoor_sensor;1234;^.*?(?<type>\w+)=(?<value>\d+\.?\d*).*$

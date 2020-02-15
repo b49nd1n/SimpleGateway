@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AM2301/AM2301.iml" filepath="$PROJECT_DIR$/AM2301/AM2301.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BME280/BME280.iml" filepath="$PROJECT_DIR$/BME280/BME280.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleGateway.iml" filepath="$PROJECT_DIR$/SimpleGateway.iml" />
+    </modules>
+  </component>
+</project>
