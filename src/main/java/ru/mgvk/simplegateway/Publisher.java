@@ -39,12 +39,12 @@ public class Publisher {
         collectors.put(config, Gauge.build()
                 .name(config.getDeviceName())
                 .help(config.getDeviceName())
-                .labelNames("type","updateDate")
+                .labelNames("type")
                 .register());
     }
 
-    public void publish(Config.ConfigEntry configEntry, String type, Double value, String date) {
-        collectors.get(configEntry).labels(type, date).set(value);
+    public void publish(Config.ConfigEntry configEntry, String type, Double value) {
+        collectors.get(configEntry).labels(type).set(value);
     }
 
 

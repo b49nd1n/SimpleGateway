@@ -69,8 +69,7 @@ public class Main implements NetWorker.OnDataRecieve {
                             Publisher.getInstance().publish(
                                     configEntry,
                                     m.group("type"),
-                                    Double.parseDouble(m.group("value")),
-                                    currentTime);
+                                    Double.parseDouble(m.group("value")));
                         } else {
                             log.log(Level.parse("ERROR"), "Non matching data!");
                         }
@@ -85,7 +84,12 @@ public class Main implements NetWorker.OnDataRecieve {
 
             }
 
+            try {
+                Publisher.getInstance().publish(configEntry, "time", (double) System.currentTimeMillis());
 
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
 
