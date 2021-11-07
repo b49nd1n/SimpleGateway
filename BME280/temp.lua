@@ -6,7 +6,7 @@ if(ip==nil) then print('data is nil!') return end
 
 print("main")
 
-alt=0 -- altitude of the measurement place
+alt=170 -- altitude of the measurement place
 
 sda, scl = 4,3
 i2c.setup(0, sda, scl, i2c.SLOW) -- call i2c.setup() only once
@@ -37,22 +37,24 @@ timer:start()
 
 function send_data(T,P,H,QNH)
     was_sent=0
-	srv = net.createConnection(net.TCP, 0)
-	srv:on("connection", function(sck, c)
-        data = "BME1: "..T.." "..P.." "..H.." "..QNH;
+    srv = net.createConnection(net.TCP, 0)
+    srv:on("connection", function(sck, c)
+        data = "T="..T..";P="..P..";H="..H..";QNH="..QNH; -- DATA TO SEND
         print("trying to send: "..data)
-		sck:send(data,function(sck,c)
+        sck:send(data,function(sck,c)
             print("data was sent, going to sleep")
             was_sent=1
             sck:close()
             end)
-		end)
-	srv:connect(port,ip)
+        end)
+    srv:connect(port,ip)
     timer:register(3000,tmr.ALARM_AUTO, function(t)
-        if(was_sent==0) then srv:connect(port,ip)
+        if(srv:getpeer()==nil) then srv:connect(port,ip)
         timer:unregister()
 
         end
     end)
     timer:start()
 end
+
+
