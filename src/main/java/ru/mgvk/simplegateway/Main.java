@@ -3,6 +3,8 @@ package ru.mgvk.simplegateway;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -47,7 +49,10 @@ public class Main implements NetWorker.OnDataRecieve {
 
     @Override
     public void onRecieve(Config.ConfigEntry configEntry, final String data) {
-        log.info("Recieved!: " + data);
+        log.info(String.format("Received %s on port %d", data, configEntry.getPort()));
+
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
+        String currentTime = format.format(new Date());
 
         if (data.contains(";")) {
 
@@ -61,8 +66,11 @@ public class Main implements NetWorker.OnDataRecieve {
 
                         m = configEntry.getPattern().matcher(part);
                         if (m.find() && m.groupCount() >= 2) {
-                            Publisher.getInstance().publish(configEntry, m.group("type"),
-                                    Double.parseDouble(m.group("value")));
+                            Publisher.getInstance().publish(
+                                    configEntry,
+                                    m.group("type"),
+                                    Double.parseDouble(m.group("value")),
+                                    currentTime);
                         } else {
                             log.log(Level.parse("ERROR"), "Non matching data!");
                         }

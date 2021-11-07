@@ -9,7 +9,7 @@ public class MyFormatter extends Formatter {
     @Override
     public String format(LogRecord record) {
 
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.YY HH:mm:ss.SSS");
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm:ss.SSS");
 
         return String.format("[%s, %s, %s]: %s\n",
                 record.getLevel(),
